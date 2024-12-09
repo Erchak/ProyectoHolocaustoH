@@ -1,0 +1,113 @@
+/*     
+     Getters y Setters: (Obtiene y Modifica) (No son Constructores)
+   - Son métodos especiales utilizados para acceder (obtener) y modificar los atributos de una clase de forma controlada. Estos métodos forman parte del 
+   concepto de encapsulamiento, el cual protege los datos de una clase permitiendo el acceso a ellos a través de métodos, en lugar de exponer los atri
+   butos directamente. 
+
+   * Getters (Métodos Accesores) (Proporciona un acceso controlado al valor del atributo de una clase fuera de la misma sin exponerlo al exterior)
+   - Un getter es un método utilizado para obtener el valor de un atributo privado de una clase. Generalmente, el nombre del getter comienza con "get" 
+   seguido del nombre del atributo con la primera letra en Mayúscula.
+
+   * Setters (Métodos Modificadores)
+   - Un setter es un método utilizado para modificar el valor de un atributo privado de una clase. Los setters suelen comenzar con "set" seguido del
+   nombre del atributo con la primera letra en Mayúscula.
+
+   Ejemplo:
+
+   public class Persona {
+   // Atributos privados
+   private String nombre;
+   private int edad;
+
+   // Constructor:
+   public Persona(String nombre, int edad) { -> Aquí el Constructor Inicializa el objeto Persona y Asigna valores a sus atributos.
+   this.nombre = nombre;
+   this.edad = edad;
+   }
+
+   // Getter para nombre
+   public String getNombre() { -> get seguido de la primera letra del nombre del atributo: 'Nombre' en Mayúscula.
+    return nombre;
+   }
+
+   // Setter para nombre
+   public void setNombre(String nombre) { -> set seguido de la primera letra del nombre del atributo: 'Nombre' en Mayúscula.
+   this.nombre = nombre;
+   }
+
+   // Getter para edad
+   public int getEdad() {
+      return edad;
+   }
+
+   // Setter para edad
+   public void setEdad(int edad) {
+    this.edad = edad;
+    }
+  }
+
+
+   Uso de Getters y Setters:
+
+   - En lugar de acceder directamente a los atributos, podemos usar los getters y setters para obtener y modificar sus valores:   
+
+   public class Main {
+   public static void main(String[] args) {
+    // Crear un objeto de tipo Persona
+    Persona persona = new Persona("Juan", 30);
+
+    // Usar getters para obtener los valores:
+    System.out.println("Nombre: " + persona.getNombre());
+    System.out.println("Edad: " + persona.getEdad());
+
+    // Usar setters para modificar los valores:
+    persona.setNombre("Carlos");
+    persona.setEdad(35);
+
+    // Mostrar los valores modificados
+    System.out.println("Nombre modificado: " + persona.getNombre());
+    System.out.println("Edad modificada: " + persona.getEdad());
+    }
+  }
+
+   Ventajas de Getters y Setters:
+   * Encapsulamiento: Protegen los atributos internos de una clase al hacerlos privados y proporcionando acceso controlado mediante métodos.
+   * Validación: Permiten agregar lógica adicional en los setters para validar o modificar el valor antes de asignarlo al atributo.
+   * Flexibilidad: Facilitan la modificación del comportamiento interno de la clase sin afectar el código externo que la utiliza.
+
+   - Por ejemplo, puedes agregar validaciones en el setter para evitar asignar valores no deseados:
+
+   public void setEdad(int edad) {
+   if (edad >= 0) { // Validación utilizando un condicional if.
+    this.edad = edad;
+   } else {
+    System.out.println("La edad no puede ser negativa.");
+    }
+  }
+
+   ¿De qué o cómo protegen exactamente los getters y setters los datos de una clase?:
+
+   1.- Protección contra acceso directo: Modificaciones Directas e incontroladas por código Externo sin ningún tipo de Restricción ni Control.
+   2.- Validación de Datos: Evita que los atributos contengan valores inválidos o inconsistentes. (Aplicando, por ejemplo, condiciones o condicionales)
+   3.- Modificación Encapsulada: Flexibilidad, getters o setters no alteran el código cliente, proporcionando flexibilidad para la evolución del código
+    cambiando y mejorando internamente los atributos y su lógica de acceso.
+   4.- Inmutabilidad Controlada: Los getters y setters también pueden ayudar a definir la inmutabilidad parcial de un objeto. Por ejemplo, podemos definir 
+       solo getters para algunos atributos si no deseamos que estos atributos puedan ser modificados después de haber sido asignados.
+       
+    Ejemplo:
+   
+    public class Persona {
+    private final String nombre;
+
+    public Persona(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    // Sin setter para 'nombre', lo que significa que 'nombre' es inmutable
+}
+  
+    */

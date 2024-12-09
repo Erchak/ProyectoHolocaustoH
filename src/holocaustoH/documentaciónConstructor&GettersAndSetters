@@ -1,0 +1,122 @@
+// Diferencias entre un constructor y Getters & Setters:
+                        
+//            Constructor                 Getters & Setters
+// Propósito  Inicializa los atributos    Obtienen o establecen / modifican los valores de los atributos.
+//            del objeto.
+
+// Nombre     Igual al de la clase.       Definido por el programador (get/set + el nombre del atributo).  
+
+// Tipo de    Ninguno (ni void).          El getter devuelve el valor del atributo; el setter es void.
+// Retorno
+
+// Invocaci-  Se ejecuta al crear un      Se ejecutan cuando son llamados explícitamente en el código.
+// ón         objeto (con 'new').
+
+// Acceso a   Generalmente inicializa     Proporcionan acceso y modificación controlada a los atributos privados.
+// atributos  atributos privados.
+
+// Validaci-  No suele validar datos.     Los setters pueden incluir validaciones para controlar los valores asignados. (Ej: if (edad > 0) {
+// ón                                                                                                                           this.edad = edad;
+//                                                                                                                           }
+
+// Claves de la Sobrecarga de Métodos:
+
+// Mismo nombre de método: Todos los métodos sobrecargados tienen el mismo nombre.
+// Distintos parámetros: Los métodos sobrecargados deben diferir en el número de parámetros, el tipo de parámetros, o ambos.
+// Misma clase: Los métodos sobrecargados deben pertenecer a la misma clase (o heredarse a partir de una clase base).
+
+// Ejemplo:
+
+/*
+   public class Calculadora {
+
+    // Sobrecarga del método sumar:
+    public int sumar(int a, int b) {
+        return a + b;
+    }
+
+    // Sobrecarga del método sumar con dos parámetros:
+    public double sumar(double a, double b) {
+        return a + b;
+    }
+
+    // Sobrecarga del método sumar con tres parámetros:
+    public int sumar(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+
+// En este ejemplo, el método sumar está sobrecargado. Hay tres versiones de sumar, y cada una se puede invocar dependiendo del tipo y número de paráme-
+   tros que se le pase.
+ 
+   Ventajas de la Sobrecarga:
+   
+-  Legibilidad: Hace que el código sea más fácil de leer al usar el mismo nombre para operaciones relacionadas.
+-  Flexibilidad: Permite que un método pueda manejar diferentes tipos o cantidades de datos sin tener que crear nuevos métodos con nombres diferentes.
+-  Reutilización: Permite tener un conjunto de funciones que realizan tareas similares, pero que trabajan con diferentes tipos de entradas. (int, double)
+                                                                                   
+ 
+ 
+// Desarrollo en el día a día: 
+ 
+ - La sobrecarga de métodos en Java es útil en el desarrollo de software porque permite crear código más flexible, limpio y reutilizable. En el día a día, 
+   los desarrolladores se enfrentan a situaciones donde un método necesita realizar la misma operación o tarea lógica pero con diferentes tipos o cantida-
+   des de datos. La sobrecarga ayuda a manejar estos casos sin tener que crear múltiples métodos con nombres diferentes, haciendo que el código sea más 
+   fácil de leer y mantener.
+ 
+   Por ejemplo:
+ 
+   1. Aplicaciones con múltiples formatos de entrada:
+   
+      En un sistema de pagos, podríamos necesitar procesar pagos de distintas maneras: con tarjeta de crédito, transferencia bancaria o efectivo. En 
+      lugar de crear métodos como procesarPagoConTarjeta(), procesarPagoConTransferencia(), y procesarPagoConEfectivo(), podemos sobrecargar el método 
+      procesarPago para que acepte diferentes tipos de parámetros:
+ 
+   public class ProcesadorDePagos {
+
+    public void procesarPago(String numeroTarjeta, double monto) {
+        // Lógica para procesar el pago con tarjeta
+    }
+
+    public void procesarPago(String cuentaBancaria, double monto, String codigoBanco) {
+        // Lógica para procesar el pago por transferencia bancaria
+    }
+
+    public void procesarPago(double monto) {
+        // Lógica para procesar el pago en efectivo
+    }
+}
+
+  - Ventaja:
+  
+    Esto permite tener una única interfaz para procesar pagos, pero con soporte para diferentes medios de pago. Hace que la API sea más intuitiva y fácil 
+    de mantener.
+ 
+  
+  2. Generación de reportes en distintos formatos:
+ 
+     Si estamos desarrollando una aplicación que genera reportes en diferentes formatos (texto, PDF, Excel), podemos usar la sobrecarga para manejar 
+     estos casos:
+ 
+   public class GeneradorDeReportes {
+
+      public void generarReporte(String contenidoTexto) {
+        // Lógica para generar un reporte en formato de texto
+      }
+
+      public void generarReporte(byte[] contenidoPDF) {
+        // Lógica para generar un reporte en formato PDF
+      }
+
+      public void generarReporte(File archivoExcel) {
+        // Lógica para generar un reporte en formato Excel
+      
+    }
+}
+
+  - Ventaja: 
+    
+    Los usuarios o componentes del sistema pueden generar reportes sin preocuparse de cómo llamarlo, simplemente llamando a generarReporte, y dependiendo
+    de los datos proporcionados, se genera el formato adecuado.
+    
+ */

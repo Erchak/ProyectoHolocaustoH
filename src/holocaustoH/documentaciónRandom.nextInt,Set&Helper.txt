@@ -1,0 +1,141 @@
+/* - Preguntas:
+
+1.- ¿Por qué random.nextInt incluye siempre el 0 y nunca llega a n?
+
+  -> random.nextInt(n) genera un número aleatorio dentro del rango [0, n), es decir, un número mayor o igual a 0 y menor que n. 
+     
+   - Por ejemplo:
+     
+  -> Si llamamos a random.nextInt(6), los posibles valores que puede devolver son 0, 1, 2, 3, 4 y 5 (pero no 6). (Se exluye a n).
+     
+   - La lógica es que los índices en la mayoría de las estructuras en programación, como los arrays, empiezan desde 0. De ahí que los números aleatorios 
+     sigan esta convención.
+
+   - Internamente, random.nextInt(n) funciona dividiendo el rango total de números posibles que puede generar en segmentos de igual tamaño, donde el núme-
+     ro más bajo siempre es 0 y el más alto es n-1. Esto asegura una distribución uniforme de los valores.                
+                   
+                   
+2.- ¿Cómo se aplica esto a nuestra variable: int puertaColumnaIzquierda = random.nextInt(Habitacion.alto - 3) + 2;?                   
+                   
+  -> El orden de ejecución dentro del paréntesis es el siguiente: (Habitacion.alto - 3) = (9 - 3 = 6) hasta este resultado no se incluye el 6, solo el 0
+     hasta el 5. Luego, se suma el +2 declarado fuera del paréntesis de modo que, cuando el resultado aleatorio sea 5, sea sumado a +2, desplazando de es-                
+     ta manera el último resultado posible dentro de random.nextInt el cual es 5, junto con el resto de los valores aleatorios anteriores a este número.
+     
+  -> De igual forma, para cuando el resultado de random.nexInt sea el mínimo posible (0), se sumará a +2 al igual que al resto de los valores que segui-
+     án hasta el 5:
+     
+     0 + 2 = 2
+     1 + 2 = 3
+     2 + 2 = 4
+     3 + 2 = 5
+     4 + 2 = 6
+     5 + 2 = 7
+                   
+                   
+-> Otras formas de realizar la distribución de las puertas:                  
+                   
+ * Podemos utilizar un Set (no confundirlo con Setter) el cual es una colección de elementos que no permite duplicados. Si se intenta agregar un elemen-
+   to que ya existe en el Set, este simplemente lo ignorará. A diferencia de listas o arrays, los Set no garantizan el orden en el que los elementos son 
+   almacenados o recuperados (aunque hay variantes como LinkedHashSet que mantienen el orden de inserción).                  
+                   
+   // Usamos un Set para asegurar que no haya duplicados en las posiciones de las puertas:
+        Set<Integer> posicionesPuertas = new HashSet<>();
+
+        // Añadimos posiciones hasta que tengamos dos puertas
+        while (posicionesPuertas.size() < 2) {
+            int posicionAleatoria = random.nextInt(Habitacion.alto - 3) + 2;
+            posicionesPuertas.add(posicionAleatoria);
+        }
+
+        // Convertimos el Set en un array para usar las posiciones:
+        Integer[] puertas = posicionesPuertas.toArray(new Integer[0]);
+        int puertaColumnaIzquierda = puertas[0]; // contiene la fila de la puerta izquierda.
+        int puertaColumnaDerecha = puertas[1];   // contiene la fila de la puerta derecha.              
+                   
+ * Esto nos permite acceder a las posiciones de las puertas de manera más sencilla y usar esos valores en el bucle para dibujarlas.                 
+                   
+-> Un HashSet es una colección que garantiza que no haya duplicados y permite acceso rápido a los elementos.
+-> Una tabla hash es la estructura de datos que permite que los elementos se almacenen y accedan de manera eficiente mediante una función hash.
+-> HashSet usa una tabla hash internamente para asegurarse de que cada elemento se almacena una sola vez y que las operaciones de búsqueda, inserción y 
+   eliminación son rápidas.                  
+                   
+                   
+  ¿Es un Set una lista?
+  
+-> No, un Set no es una lista. La principal diferencia es que:
+
+1.- Un Set no tiene elementos duplicados y no garantiza el orden.
+2.- Una lista (List o ArrayList) permite elementos duplicados y mantiene el orden de inserción. 
+
+*/
+
+
+
+/* Helper:
+
+ - Helper es una clase o conjunto de métodos que sirven de apoyo o utilidad para realizar tareas específicas. Los métodos Helper no crean instancias por 
+   sí mismos; más bien, se utilizan para realizar operaciones auxiliares, como cálculos, validaciones o procesamiento de datos.
+   
+   Métodos Static:
+   
+ - Un método static pertenece a la clase en sí misma y no a una instancia (u objeto) de la clase. Por lo tanto, se puede invocar directamente utilizando 
+   el nombre de la clase, sin crear un objeto de esa clase.
+
+   Ejemplo:
+   
+   public class Habitacion {
+	
+	public static final int ANCHO=30;
+	public static final int ALTO=10;
+
+ - Los métodos estáticos son comunes en clases Helper porque estos métodos proporcionan funciones utilitarias que no dependen del estado de un objeto 
+   particular. Simplemente ejecutan una tarea sin necesidad de instanciar la clase.           
+   
+   Clases Helper:
+   
+ - Las clases Helper suelen contener métodos que realizan tareas comunes, como validaciones, cálculos o manipulaciones de datos.
+ - Definir estos métodos como static permite acceder a ellos de manera sencilla sin crear una instancia, lo que hace que el código sea más conciso y efi-
+   ciente.
+   
+   Ejemplo:
+   
+// Clase Helper con métodos estáticos:
+ 
+    public class MathHelper {
+       public static int sumar(int a, int b) {
+         return a + b;
+    }
+
+    public static int restar(int a, int b) {
+        return a - b;
+      }
+    }
+
+// Uso de los métodos estáticos en MathHelper:
+ 
+    public class Main {
+       public static void main(String[] args) {
+       
+        // No se necesita crear un objeto de MathHelper:
+         
+        int resultadoSuma = MathHelper.sumar(5, 10);
+        int resultadoResta = MathHelper.restar(10, 3);
+
+        System.out.println("Suma: " + resultadoSuma);
+        System.out.println("Resta: " + resultadoResta);
+    }
+}
+
+   Ventajas de usar static en Helpers:
+   
+1. Eficiencia: No es necesario instanciar una clase cada vez que se necesita realizar una operación común, como en el ejemplo anterior, donde no hay nece-
+   sidad de crear un objeto de MathHelper.
+   
+2. Acceso global: Los métodos static pueden ser llamados desde cualquier parte del programa, simplemente utilizando el nombre de la clase que los contiene.
+3. Facilidad de uso: Los métodos utilitarios que no dependen de un estado específico de un objeto pueden definirse como static para simplificar el código.
+
+ - En resumen, la relación entre static y los Helpers es que los métodos Helper suelen ser static, permitiendo su uso sin instancias y facilitando el acceso global para realizar tareas comunes o repetitivas.
+   
+   */                  
+                                   
+                   
